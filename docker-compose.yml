@@ -3,16 +3,45 @@ version: '3.8'
 services:
   ghost:
     image: ghost:latest
-    container_name: ghost_test
+    container_name: ghost
     restart: always
-    ports:
-      - "2368:2368"
     environment:
-      - database__client=sqlite3
-      - database__connection__filename=/var/lib/ghost/content/data/ghost.db
-      - url=http://localhost:2368
+      - database__client=mysql
+      - database__connection__host=db
+      - database__connection__user=ghost_user
+      - database__connection__password=wachtwoord
+      - database__connection__database=ghost_db
+      - url=https://luxzen.eu
     volumes:
       - ghost_content:/var/lib/ghost/content
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    container_name: ghost_db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_wachtwoord
+      - MYSQL_DATABASE=ghost_db
+      - MYSQL_USER=ghost_user
+      - MYSQL_PASSWORD=wachtwoord
+    volumes:
+      - ghost_mysql:/var/lib/mysql
+
+  nginx:
+    image: nginx:latest
+    container_name: ghost_nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - /etc/letsencrypt:/etc/letsencrypt
+    depends_on:
+      - ghost
 
 volumes:
   ghost_content:
+  ghost_mysql:
