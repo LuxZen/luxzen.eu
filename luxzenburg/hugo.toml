@@ -1,0 +1,79 @@
+## Hugo configuration for luxzenburg.nl / luxzenburg.org
+## Multi-language setup: Dutch essays on .nl, English essays on .org
+## The same Hugo project builds both sites; nginx on the VPS serves the
+## correct language root for each domain (see nginx/conf.d/ in the parent repo).
+
+baseURL = "https://luxzenburg.nl/"
+title = "Luxzenburg"
+theme = ""  # custom layouts live directly in ./layouts, no external theme
+defaultContentLanguage = "nl"
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+enableEmoji = false
+enableGitInfo = true  # uses git commit date as lastmod
+summaryLength = 40
+
+# Don't generate taxonomies we don't use
+disableKinds = ["taxonomyTerm"]
+
+[params]
+  author = "Erik van Luxzenburg"
+  description = "Essays vanuit systeem-denken"
+  # No analytics, no tracking, no JS. First principle: respect the reader.
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # allow raw HTML in markdown (for occasional <aside> margin notes)
+    [markup.goldmark.extensions]
+      linkify = true
+      strikethrough = true
+      table = true
+      typographer = true
+    [markup.goldmark.parser]
+      wikiLinks = true  # Obsidian-style [[links]] between essays
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+
+[languages]
+  [languages.nl]
+    languageName = "Nederlands"
+    languageCode = "nl-NL"
+    title = "Luxzenburg"
+    weight = 1
+    [languages.nl.params]
+      description = "Essays vanuit systeem-denken"
+      subtitle = "Maatschappijkritische essays"
+    [[languages.nl.menu.main]]
+      name = "Essays"
+      url = "/essays/"
+      weight = 1
+    [[languages.nl.menu.main]]
+      name = "Over"
+      url = "/over/"
+      weight = 2
+
+  [languages.en]
+    languageName = "English"
+    languageCode = "en"
+    title = "Luxzenburg"
+    weight = 2
+    [languages.en.params]
+      description = "Essays from a systems-thinking perspective"
+      subtitle = "Essays on society and systems"
+    [[languages.en.menu.main]]
+      name = "Essays"
+      url = "/essays/"
+      weight = 1
+    [[languages.en.menu.main]]
+      name = "About"
+      url = "/about/"
+      weight = 2
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[permalinks]
+  essays = "/essays/:slug/"

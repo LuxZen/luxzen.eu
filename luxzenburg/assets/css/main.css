@@ -1,0 +1,263 @@
+/*
+  luxzenburg.{nl,org} — minimal essay typography
+  Inspired by Tufte CSS, Matthew Butterick's Practical Typography,
+  and the slow-web aesthetic of Gwern / Paul Graham.
+
+  No web fonts loaded from third parties. We use a serif system stack
+  so the page renders instantly and works offline. If you want ET Book
+  or Source Serif later, drop the woff2 files into static/fonts/ and
+  add an @font-face block here.
+*/
+
+:root {
+  --max-width: 38rem;
+  --color-bg: #fffff8;       /* warm off-white, classic Tufte */
+  --color-text: #111;
+  --color-muted: #666;
+  --color-rule: #ccc;
+  --color-link: #1a1a1a;
+  --color-link-underline: #888;
+  --serif: Charter, "Iowan Old Style", "Source Serif Pro", "Apple Garamond",
+           "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1a1a1a;
+    --color-text: #e8e8e8;
+    --color-muted: #999;
+    --color-rule: #444;
+    --color-link: #f0f0f0;
+    --color-link-underline: #777;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html {
+  font-size: 18px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.55;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern", "liga", "onum";
+}
+
+/* ── Header ─────────────────────────────────────────── */
+
+.site-header {
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.site-title {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.site-subtitle {
+  margin: 0.25rem 0 0;
+  color: var(--color-muted);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+.site-nav {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.site-nav a {
+  margin-right: 1rem;
+  color: var(--color-muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.site-nav a:hover {
+  color: var(--color-text);
+  border-bottom-color: var(--color-link-underline);
+}
+
+.site-nav .lang-switch {
+  float: right;
+  font-style: italic;
+}
+
+/* ── Typography ─────────────────────────────────────── */
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+h1 { font-size: 2rem; margin-top: 0; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.15rem; font-style: italic; font-weight: 500; }
+
+p {
+  margin: 0 0 1.1rem;
+  hyphens: auto;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-link-underline);
+}
+
+a:hover {
+  border-bottom-color: var(--color-text);
+}
+
+blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--color-rule);
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+}
+
+pre {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--color-rule);
+  border-radius: 2px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-rule);
+  margin: 2.5rem auto;
+  width: 30%;
+}
+
+/* Tufte-style margin notes via raw <aside class="marginnote"> in markdown */
+aside.marginnote {
+  display: block;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--color-muted);
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 1px solid var(--color-rule);
+}
+
+@media (min-width: 1100px) {
+  aside.marginnote {
+    float: right;
+    clear: right;
+    width: 14rem;
+    margin-right: -16rem;
+    padding-left: 0;
+    border-left: none;
+  }
+}
+
+/* ── Essay ──────────────────────────────────────────── */
+
+.essay-header { margin-bottom: 2rem; }
+
+.essay-meta {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: 0.25rem;
+}
+
+.essay-body { margin-top: 1.5rem; }
+
+.essay-footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-rule);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* ── Lists of essays ────────────────────────────────── */
+
+.essay-list {
+  list-style: none;
+  padding: 0;
+}
+
+.essay-list li {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.essay-list li:last-child { border-bottom: none; }
+
+.essay-list time {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  font-style: italic;
+  margin-bottom: 0.25rem;
+}
+
+.essay-list a {
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-bottom: none;
+}
+
+.essay-list a:hover { border-bottom: 1px solid var(--color-text); }
+
+.essay-list .summary {
+  margin-top: 0.4rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.recent-essays h2 {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Footer ─────────────────────────────────────────── */
+
+.site-footer {
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-rule);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.site-footer a { color: var(--color-muted); }

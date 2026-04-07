@@ -1,0 +1,27 @@
+{{ define "main" }}
+  <article class="essay">
+    <header class="essay-header">
+      <h1>{{ .Title }}</h1>
+      <p class="essay-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+        {{ with .Params.tags }}
+          &middot;
+          {{ range $i, $t := . }}{{ if $i }}, {{ end }}<span class="tag">{{ $t }}</span>{{ end }}
+        {{ end }}
+      </p>
+    </header>
+
+    <div class="essay-body">
+      {{ .Content }}
+    </div>
+
+    <footer class="essay-footer">
+      {{ if .GitInfo }}
+        <p class="last-modified">
+          {{ if eq .Site.Language.Lang "nl" }}Laatst bewerkt{{ else }}Last edited{{ end }}:
+          <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format "2 January 2006" }}</time>
+        </p>
+      {{ end }}
+    </footer>
+  </article>
+{{ end }}

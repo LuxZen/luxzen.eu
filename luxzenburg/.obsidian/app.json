@@ -1,0 +1,14 @@
+{
+  "useMarkdownLinks": false,
+  "newLinkFormat": "shortest",
+  "attachmentFolderPath": "../../static/img",
+  "alwaysUpdateLinks": true,
+  "defaultViewMode": "source",
+  "livePreview": true,
+  "showLineNumber": false,
+  "spellcheck": true,
+  "spellcheckLanguages": ["nl", "en"],
+  "readableLineLength": true,
+  "strictLineBreaks": false,
+  "showFrontmatter": true
+}

@@ -1,0 +1,14 @@
+# Hugo build output
+/public/
+/resources/
+.hugo_build.lock
+
+# Obsidian: keep config & snippets in git, exclude per-machine state
+.obsidian/workspace
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+
+# OS junk
+.DS_Store
+Thumbs.db
